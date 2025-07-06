@@ -32,8 +32,8 @@ const { title, description, image = "/nano.png" } = Astro.props;
 <meta name="generator" content={Astro.generator} />
 
 <!-- Font preloads -->
-<link rel="preload" href={inter400} as="font" type="font/woff2" crossorigin/>
-<link rel="preload" href={inter600} as="font" type="font/woff2" crossorigin/>
+<link rel="preload" href={inter400} as="font" type="font/woff2" crossorigin fetchpriority="high"/>
+<link rel="preload" href={inter600} as="font" type="font/woff2" crossorigin fetchpriority="high"/>
 <link rel="preload" href={lora400} as="font" type="font/woff2" crossorigin/>
 <link rel="preload" href={lora600} as="font" type="font/woff2" crossorigin/>
 
@@ -66,13 +66,20 @@ const { title, description, image = "/nano.png" } = Astro.props;
 
 <script>
   import type { TransitionBeforeSwapEvent } from "astro:transitions/client";
-  document.addEventListener("astro:before-swap", (e) =>
-    [
-      ...(e as TransitionBeforeSwapEvent).newDocument.head.querySelectorAll(
-        "link[as=\"font\"]"
-      ),
-    ].forEach((link) => link.remove())
-  );
+  document.addEventListener("astro:before-swap", (e) => {
+    // Remove duplicate font preloads but keep the ones from the current page
+    const currentFontLinks = document.head.querySelectorAll("link[as=\"font\"]");
+    const newFontLinks = (e as TransitionBeforeSwapEvent).newDocument.head.querySelectorAll("link[as=\"font\"]");
+    
+    newFontLinks.forEach((newLink) => {
+      const duplicate = Array.from(currentFontLinks).find(
+        (currentLink) => currentLink.getAttribute("href") === newLink.getAttribute("href")
+      );
+      if (duplicate) {
+        newLink.remove();
+      }
+    });
+  });
 </script>
 
 <script is:inline>
