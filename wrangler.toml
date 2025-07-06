@@ -1,0 +1,14 @@
+# Cloudflare Pages configuration
+name = "rudy-adams-blog"
+compatibility_date = "2024-01-01"
+
+[build]
+command = "npm run build"
+cwd = "."
+watch_dir = "src"
+
+[env.production]
+name = "rudy-adams-blog"
+
+[env.preview]
+name = "rudy-adams-blog-preview"
