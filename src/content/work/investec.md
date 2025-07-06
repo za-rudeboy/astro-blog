@@ -1,5 +1,5 @@
 ---
-company: "Investec (Specialist Bank)"
+company: "Investec (Specialist Banking)"
 role: "Engineering Lead"
 dateStart: "06/01/2016"
 dateEnd: "Current"
