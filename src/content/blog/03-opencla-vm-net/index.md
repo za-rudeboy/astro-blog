@@ -6,8 +6,8 @@ date: "Mar 09 2026"
 
 #### Running Risky AI Agents Safely: Using a VM and QEMU Port Forwarding
 
-I recently wanted to experiment with **OpenClaw**, an autonomous coding
-agent. These types of tools are powerful, but they come with a
+I recently wanted to experiment with [**OpenClaw**](https://openclaw.ai/), an autonomous AI agent.
+These types of tools are powerful, but they come with a
 significant security caveat:
 
 They typically require **full shell access** to the machine they run on.
@@ -25,9 +25,9 @@ risky.
 
 Two reasons in particular:
 
-1.  **LLMs are not deterministic** -- they can make unexpected
+1.  **LLMs are not deterministic**[^determinism] -- they can make unexpected
     decisions.
-2.  **They can be exploited** -- prompt injection or malicious code
+2.  **They can be exploited** -- [prompt injection](https://www.ibm.com/think/topics/prompt-injection) or malicious code
     could potentially make the agent execute harmful commands.
 
 Because of this, the safest approach is to run the agent in an
@@ -75,7 +75,7 @@ and potentially dangerous.
 
 ###### NAT Networking (What I Chose)
 
-Instead I used **NAT networking**.
+Instead I used [**NAT networking**](https://en.wikipedia.org/wiki/Network_address_translation).
 
 In this mode the VM sits behind a virtual router:
 
@@ -233,3 +233,7 @@ virsh qemu-monitor-command --domain ubuntu24.04 --hmp 'hostfwd_add tcp::2222-:22
 
 It's a quick way to forward ports from your host into a NAT'd QEMU VM so
 you can SSH in and manage it.
+
+[^determinism]: What is determinism? A deterministic process is one in
+    which the outcome is entirely determined by the initial conditions
+    and the rules governing it, with no randomness involved.
