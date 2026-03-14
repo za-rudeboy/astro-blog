@@ -1,7 +1,7 @@
 ---
 title: "Containing AI Agents with Virtual Machines and NAT Networking"
 description: "Running AI Agents Safely with a Local VM (and QEMU Port Forwarding)"
-date: "Mar 09 2026"
+date: "Mar 14 2026"
 ---
 
 #### Running Risky AI Agents Safely: Using a VM and QEMU Port Forwarding
