@@ -1,10 +1,8 @@
 ---
-title: "Understanding LangGraph After One Day With It"
+title: "Playing with LangGraph"
 description: "What clicked for me about LangGraph after building a small local learning project."
 date: "May 10 2026"
 ---
-
-#### Understanding LangGraph After One Day With It
 
 I had never used LangGraph before today.
 
@@ -12,7 +10,7 @@ I had seen the name around, and I understood at a high level that it had somethi
 
 If you have never heard of LangGraph before, the short version is that it is a Python framework for building stateful, multi-step LLM applications. Instead of thinking in terms of one prompt and one response, it lets you model a flow made up of steps, branching decisions, shared state, and persistence between steps.
 
-After spending a day with it, the biggest thing that made it click for me was this:
+After spending some time with it, the biggest thing that made it click for me was this:
 
 LangGraph is much easier to understand if you stop thinking about it as “AI magic” and instead think about it as a **stateful workflow engine** built on top of ideas that should already feel familiar if you have a computer science or software engineering background.
 
@@ -206,7 +204,7 @@ My first impression is that the Graph API is the better learning tool, while the
 
 #### Where I Think I Would Use LangGraph
 
-After one day with it, the use cases that make sense to me are:
+After playing around with LangGraph for a bit, the use cases that make sense to me are:
 
 - multi-step agents that call tools
 - workflows with branching decisions
