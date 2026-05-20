@@ -4,11 +4,13 @@ description: "What clicked for me about LangGraph after building a small local l
 date: "May 10 2026"
 ---
 
-I had never used LangGraph before today.
+I had never used [LangGraph](https://www.langchain.com/langgraph) before today.
 
 I had seen the name around, and I understood at a high level that it had something to do with agents and workflows, but I had not actually built anything with it yet.
 
 If you have never heard of LangGraph before, the short version is that it is a Python framework for building stateful, multi-step LLM applications. Instead of thinking in terms of one prompt and one response, it lets you model a flow made up of steps, branching decisions, shared state, and persistence between steps.
+
+It also helps to place it in the broader LangChain ecosystem. LangChain is the wider set of tools and abstractions for building LLM applications, while LangGraph is the part focused on orchestration. Put simply: LangChain gives you building blocks for working with models, prompts, tools, and messages, and LangGraph gives you a structured way to run those pieces through a durable workflow.
 
 After spending some time with it, the biggest thing that made it click for me was this:
 
@@ -28,6 +30,8 @@ Once I started looking at it that way, it stopped feeling mysterious.
 #### What LangGraph Actually Is
 
 At its core, LangGraph is a runtime for building multi-step applications where state moves through a graph.
+
+It is developed as part of the LangChain ecosystem, but it solves a more specific problem. If LangChain is the general toolkit, LangGraph is the workflow layer inside that world. That distinction is useful because it explains why LangGraph starts to make sense only once your app has multiple steps, routing decisions, or memory that needs to survive beyond a single prompt.
 
 Each step in the graph reads some state, does some work, and returns updates. The runtime then merges those updates into the shared state and follows the next edge.
 
@@ -102,6 +106,8 @@ No models. No tools. No prompts. Just workflow mechanics.
 
 For learning, that was the right place to start, because it made it obvious that a node is simply a step of computation and an edge is simply the control-flow rule that determines where execution goes next.
 
+That kind of example is also a good reminder that LangGraph is not only for "full agent" systems. You can use it for ordinary, explicit workflows where an LLM might only appear in one or two nodes.
+
 ---
 
 #### The Example That Taught Me the Most
@@ -131,6 +137,8 @@ Second, nodes return **state updates**, not some giant monolithic output object.
 Third, the `history` field showed me how state merging works. In this example, multiple nodes append to the same list rather than overwriting it. That gave me a simple audit trail of what happened during the run.
 
 That last part felt especially useful. Once you have branching workflows, being able to inspect the decision path is not a nice-to-have. It is part of making the system debuggable.
+
+It also felt like a more realistic example than the usual "chatbot" framing. A ticket router has obvious steps, obvious branching, and obvious state: classify the request, decide whether it needs a human, route it, and keep enough history to explain why the system did what it did.
 
 ---
 
@@ -211,6 +219,12 @@ After playing around with LangGraph for a bit, the use cases that make sense to 
 - systems that need thread-level memory
 - flows that may pause for human review
 - long-running processes where resumability matters
+
+More concrete versions of those might be:
+
+- a support workflow that triages requests before deciding whether to draft a reply or escalate
+- a research assistant that searches, summarizes, then asks for approval before continuing
+- a document-processing pipeline that classifies files, extracts fields, and routes exceptions to a person
 
 The common theme is that there is real workflow complexity to manage.
 
