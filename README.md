@@ -1,64 +1,77 @@
-![Astro Nano](_astro_nano.png)
+# Rudy Adams Personal Site
 
-Astro Nano is a static, minimalist, lightweight, lightning fast portfolio and blog theme.
+Personal portfolio and technical blog for Rudy Adams. The site is built with Astro, Tailwind CSS, MDX support, RSS, sitemap generation, and a Netlify deployment target.
 
-Built with Astro, Tailwind and Typescript, an no frameworks.
+The current visual direction is a subtle evolution of the original Astro Nano theme: technical, sharp, mostly monochrome, with a restrained blue accent and light/dark theme support.
 
-It was designed as an even more minimal theme than my popular theme [Astro Sphere](https://github.com/markhorn-dev/astro-sphere)
+## Project Structure
 
-## 🚀 Deploy your own
+```text
+src/
+  components/   Reusable Astro UI components
+  content/      Blog, project, and work entries
+  layouts/      Shared page layouts
+  lib/          Utility functions
+  pages/        Astro routes, RSS, and robots.txt
+  styles/       Global Tailwind and theme styles
+public/         Static assets, fonts, favicons, and images
+```
 
-[![Deploy with Vercel](_deploy_vercel.svg)](https://vercel.com/new/clone?repository-url=https://github.com/markhorn-dev/astro-nano)  [![Deploy with Netlify](_deploy_netlify.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/markhorn-dev/astro-nano)
+Content schemas live in `src/content/config.ts`. Update that file before adding new frontmatter fields.
 
-## 📋 Features
+## Local Development
 
-- ✅ 100/100 Lighthouse performance
-- ✅ Responsive
-- ✅ Accessible
-- ✅ SEO-friendly
-- ✅ Typesafe
-- ✅ Minimal style
-- ✅ Light/Dark Theme
-- ✅ Animated UI
-- ✅ Tailwind styling
-- ✅ Auto generated sitemap
-- ✅ Auto generated RSS Feed
-- ✅ Markdown support
-- ✅ MDX Support (components in your markdown)
+Run all commands from the repository root.
 
-## 💯 Lighthouse score
-![Astro Nano Lighthouse Score](_lighthouse.png)
+| Command | Purpose |
+| --- | --- |
+| `npm install` | Install dependencies |
+| `npm run dev` | Start the Astro dev server at `localhost:4321` |
+| `npm run build` | Run Astro checks and build the production site to `dist/` |
+| `npm run preview` | Preview the production build locally |
+| `npm run lint` | Run ESLint |
+| `npm run lint:fix` | Apply safe ESLint fixes |
 
-## 🕊️ Lightweight
-No frameworks or added bulk
+## Content Editing
 
-## ⚡︎ Fast
-Rendered in ~40ms on localhost
+Blog posts and projects use folder-based slugs:
 
-## 📄 Configuration
+```text
+src/content/blog/<slug>/index.md
+src/content/projects/<slug>/index.md
+```
 
-The blog posts on the demo serve as the documentation and configuration.
+Blog and project frontmatter requires `title`, `description`, and `date`; `draft` is optional. Projects may also include `demoURL` and `repoURL`.
 
-## 💻 Commands
+Work entries live in `src/content/work/*.md` and require `company`, `role`, `dateStart`, and `dateEnd`.
 
-All commands are run from the root of the project, from a terminal:
+## Styling
 
-Replace npm with your package manager of choice. `npm`, `pnpm`, `yarn`, `bun`, etc
+Global styling is defined in `src/styles/global.css`. The theme uses CSS variables for colors, local Mona Sans fonts from `public/fonts`, and SVG favicons in `public/favicon-light.svg` and `public/favicon-dark.svg`.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run dev:network`     | Starts local dev server on local network         |
-| `npm run sync`            | Generates TypeScript types for all Astro modules.|
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run preview:network` | Preview build on local network                   |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-| `npm run lint`            | Run ESLint                                       |
-| `npm run lint:fix`        | Auto-fix ESLint issues                           |
+Keep future styling changes aligned with the current direction: crisp spacing, restrained surfaces, strong typography, and minimal but deliberate personality.
 
-## 🏛️ License
+## Deployment
 
-MIT
+Netlify builds the site with `npm run build` and publishes `dist/`. The production site URL is configured in `astro.config.mjs` as `https://www.rudyadams.com`.
+
+## Verification
+
+For documentation-only changes, run:
+
+```bash
+git diff --check
+```
+
+For code, content, styling, or navigation changes, run:
+
+```bash
+npm run lint
+npm run build
+```
+
+When visual behavior changes, also smoke test the site in a browser or with Playwright: open the home page, navigate to blog, open one post, and verify light/dark theme behavior.
+
+## Contributor Notes
+
+See `AGENTS.md` for detailed repository conventions, content patterns, and browser verification notes.
