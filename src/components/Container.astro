@@ -1,7 +1,12 @@
 ---
+type Props = {
+  size?: "narrow" | "wide";
+}
 
+const { size = "narrow" } = Astro.props;
+const maxWidth = size === "wide" ? "max-w-3xl" : "max-w-screen-sm";
 ---
 
-<div class="mx-auto max-w-screen-sm px-5">
+<div class:list={["mx-auto px-5", maxWidth]}>
   <slot />
 </div>

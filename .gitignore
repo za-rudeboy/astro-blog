@@ -4,6 +4,9 @@ dist/
 # generated types
 .astro/
 
+# local browser automation artifacts
+.playwright-cli/
+
 # dependencies
 node_modules/
 

@@ -31,32 +31,33 @@ const work = await Promise.all(
 ---
 
 <PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
-  <Container>
-    <h4 class="animate font-semibold text-black dark:text-white">
-      Hi, I'm Rudy <span class="text-xl">👋🏻</span> 
-    </h4>
+  <Container size="wide">
+    <div class="animate mb-12 max-w-2xl">
+      <div class="mb-3 text-sm font-semibold text-[color:var(--color-accent)]">
+        Engineering lead / software systems / practical delivery
+      </div>
+      <h4 class="text-heading text-3xl font-semibold leading-tight sm:text-4xl">
+        I build and lead software teams working on durable financial-services systems.
+      </h4>
+    </div>
     <div class="space-y-16">
       <section>
-        <article class="space-y-4">
+        <article class="max-w-2xl space-y-4">
           <p class="animate">
-            I am a South African citizen and currently reside in South Africa. 
-            I am a software engineer and engineering lead with more than 15 years of experience in my craft.
+            I am a South African software engineer and engineering lead with more than 15 years of experience turning complex business problems into reliable production systems.
           </p>
           <p class="animate">
-            I have experience working in the financial services industry, including banking and insurance. 
-            Over the years, I've worked with various technologies and programming languages, including Java, Kotlin, and C#. 
-            I also have extensive experience building CI/CD pipelines in GitLab and Azure DevOps (ADO), deploying to both on-premises infrastructure and the cloud (Azure). 
-            I have worked with various Azure services in both DevOps and software engineering capacities.
+            My work sits mostly in banking and insurance, across Java, Kotlin, C#, CI/CD, Azure, and the engineering practices needed to keep teams moving with confidence.
           </p>
           <p class="animate">
-            I am currently employed as an Engineering Lead, where my primary focus is heading up engineering for a technology division at Investec.
+            I currently head up engineering for a technology division at Investec, where the focus is technical direction, delivery quality, and building systems that age well.
           </p>
         </article>
       </section>
 
       <section class="animate space-y-6">
         <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">
+          <h5 class="text-heading font-semibold">
             Latest posts
           </h5>
           <Link href="/blog">
@@ -74,7 +75,7 @@ const work = await Promise.all(
 
       <section class="animate space-y-6">
         <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">
+          <h5 class="text-heading font-semibold">
             Work Experience
           </h5>
           <Link href="/work">
@@ -84,13 +85,13 @@ const work = await Promise.all(
         <ul class="flex flex-col space-y-4">
           {work.map(entry => (
             <li>
-              <div class="text-sm opacity-75">
+              <div class="text-sm text-muted">
                 {dateRange(entry.data.dateStart, entry.data.dateEnd)}
               </div>
-              <div class="font-semibold text-black dark:text-white">
+              <div class="text-heading font-semibold">
                 {entry.data.company}
               </div>
-              <div class="text-sm opacity-75">
+              <div class="text-sm text-muted">
                 {entry.data.role}
               </div>
               <article>
@@ -103,7 +104,7 @@ const work = await Promise.all(
 
       <section class="animate space-y-6">
         <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">
+          <h5 class="text-heading font-semibold">
             Recent projects
           </h5>
           <Link href="/projects">
@@ -120,7 +121,7 @@ const work = await Promise.all(
       </section>
 
       <section class="animate space-y-4">
-        <h5 class="font-semibold text-black dark:text-white">
+        <h5 class="text-heading font-semibold">
           Let's Connect
         </h5>
         <article>

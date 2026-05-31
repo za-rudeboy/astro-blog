@@ -9,8 +9,10 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Inter", ...defaultTheme.fontFamily.sans],
-        serif: ["Lora", ...defaultTheme.fontFamily.serif],
+        sans: ["Mona Sans", ...defaultTheme.fontFamily.sans],
+      },
+      borderRadius: {
+        card: "0.375rem",
       },
     },
   },

@@ -5,24 +5,29 @@ import { SITE } from "@consts";
 ---
 
 <header>
-  <Container>
-    <div class="flex flex-wrap gap-y-2 justify-between">
+  <Container size="wide">
+    <div class="flex flex-wrap gap-y-3 items-center justify-between">
       <Link href="/" underline={false}>
-        <div class="font-semibold">
-          {SITE.NAME}
+        <div class="group flex items-center gap-3 text-heading">
+          <span class="grid size-8 place-items-center rounded-card border border-subtle bg-[color:var(--color-surface)] text-sm font-semibold text-[color:var(--color-accent)] transition-colors duration-300 group-hover:border-[color:var(--color-accent)]">
+            RA
+          </span>
+          <span class="font-semibold">
+            {SITE.NAME}
+          </span>
         </div>
       </Link>
-      <nav class="flex gap-1">
+      <nav class="flex gap-2 text-sm text-muted">
         <Link href="/blog">
           blog
         </Link>
-        <span>
+        <span class="text-[color:var(--color-accent)]">
           {`/`}
         </span>
         <Link href="/work">
           work
         </Link>
-        <span>
+        <span class="text-[color:var(--color-accent)]">
           {`/`}
         </span>
         <Link href="/projects">
