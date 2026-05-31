@@ -1,0 +1,278 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "Rudy Adams" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e6]: Rudy Adams
+      - navigation [ref=e7]:
+        - link "blog" [ref=e8] [cursor=pointer]:
+          - /url: /blog
+        - generic [ref=e9]: /
+        - link "work" [ref=e10] [cursor=pointer]:
+          - /url: /work
+        - generic [ref=e11]: /
+        - link "projects" [ref=e12] [cursor=pointer]:
+          - /url: /projects
+  - main [ref=e13]:
+    - generic [ref=e14]:
+      - link "Back to blog" [ref=e16] [cursor=pointer]:
+        - /url: /blog
+        - img [ref=e17]
+        - generic [ref=e19]: Back to blog
+      - generic [ref=e20]:
+        - generic [ref=e21]:
+          - time [ref=e23]: May 10, 2026
+          - text: •
+          - generic [ref=e24]: 10 min read
+        - generic [ref=e25]: Playing with LangGraph
+      - article [ref=e26]:
+        - paragraph [ref=e27]:
+          - text: I had never used
+          - link "LangGraph" [ref=e28] [cursor=pointer]:
+            - /url: https://www.langchain.com/langgraph
+          - text: before today.
+        - paragraph [ref=e29]: I had seen the name around, and I understood at a high level that it had something to do with agents and workflows, but I had not actually built anything with it yet.
+        - paragraph [ref=e30]: If you have never heard of LangGraph before, the short version is that it is a Python framework for building stateful, multi-step LLM applications. Instead of thinking in terms of one prompt and one response, it lets you model a flow made up of steps, branching decisions, shared state, and persistence between steps.
+        - paragraph [ref=e31]: "It also helps to place it in the broader LangChain ecosystem. LangChain is the wider set of tools and abstractions for building LLM applications, while LangGraph is the part focused on orchestration. Put simply: LangChain gives you building blocks for working with models, prompts, tools, and messages, and LangGraph gives you a structured way to run those pieces through a durable workflow."
+        - paragraph [ref=e32]: "After spending some time with it, the biggest thing that made it click for me was this:"
+        - paragraph [ref=e33]:
+          - text: LangGraph is much easier to understand if you stop thinking about it as “AI magic” and instead think about it as a
+          - strong [ref=e34]: stateful workflow engine
+          - text: built on top of ideas that should already feel familiar if you have a computer science or software engineering background.
+        - paragraph [ref=e35]: "In other words:"
+        - list [ref=e36]:
+          - listitem [ref=e37]:
+            - text: the
+            - strong [ref=e38]: graph
+            - text: is the workflow structure
+          - listitem [ref=e39]:
+            - text: the
+            - strong [ref=e40]: state
+            - text: is the data moving through that structure
+          - listitem [ref=e41]:
+            - text: the
+            - strong [ref=e42]: nodes
+            - text: do work
+          - listitem [ref=e43]:
+            - text: the
+            - strong [ref=e44]: edges
+            - text: decide what happens next
+        - paragraph [ref=e45]: Once I started looking at it that way, it stopped feeling mysterious.
+        - separator [ref=e46]
+        - heading "What LangGraph Actually Is" [level=4] [ref=e47]
+        - paragraph [ref=e48]: At its core, LangGraph is a runtime for building multi-step applications where state moves through a graph.
+        - paragraph [ref=e49]: It is developed as part of the LangChain ecosystem, but it solves a more specific problem. If LangChain is the general toolkit, LangGraph is the workflow layer inside that world. That distinction is useful because it explains why LangGraph starts to make sense only once your app has multiple steps, routing decisions, or memory that needs to survive beyond a single prompt.
+        - paragraph [ref=e50]: Each step in the graph reads some state, does some work, and returns updates. The runtime then merges those updates into the shared state and follows the next edge.
+        - paragraph [ref=e51]: "That may sound abstract, but it is actually pretty close to concepts most engineers already know:"
+        - list [ref=e52]:
+          - listitem [ref=e53]: control flow graphs
+          - listitem [ref=e54]: state machines
+          - listitem [ref=e55]: workflow engines
+          - listitem [ref=e56]: durable jobs
+        - paragraph [ref=e57]: "The LangGraph-specific part is that it adds features that are useful for LLM systems:"
+        - list [ref=e58]:
+          - listitem [ref=e59]: checkpointing
+          - listitem [ref=e60]: resumability
+          - listitem [ref=e61]: thread-level memory
+          - listitem [ref=e62]: human-in-the-loop pauses
+          - listitem [ref=e63]: streaming
+        - paragraph [ref=e64]: So the graph theory gives you the structure, and LangGraph gives you the runtime behavior on top of that structure.
+        - separator [ref=e65]
+        - heading "What Made It Click For Me" [level=4] [ref=e66]
+        - paragraph [ref=e67]: "The distinction that mattered most for me was:"
+        - list [ref=e68]:
+          - listitem [ref=e69]:
+            - strong [ref=e70]: topology
+            - text: ": the fixed shape of the workflow"
+          - listitem [ref=e71]:
+            - strong [ref=e72]: state
+            - text: ": the mutable data moving through it"
+        - paragraph [ref=e73]: That sounds obvious, but it is the mental model that made the rest of the API make sense.
+        - paragraph [ref=e74]: In LangGraph, the graph topology is your nodes and edges. That is the static part.
+        - paragraph [ref=e75]: "The state is the data you carry through the workflow: inputs, intermediate decisions, tool results, messages, or anything else the system needs while it runs."
+        - paragraph [ref=e76]:
+          - text: That separation matters because LangGraph is not really about “generate some text.” It is about
+          - strong [ref=e77]: orchestrating a process
+          - text: .
+        - paragraph [ref=e78]: "That is why it feels like a good fit for:"
+        - list [ref=e79]:
+          - listitem [ref=e80]: branching workflows
+          - listitem [ref=e81]: tool-calling agents
+          - listitem [ref=e82]: multi-step support or review flows
+          - listitem [ref=e83]: anything that may need persistence or a human approval point
+        - paragraph [ref=e84]: And it is also why it would be overkill for a one-shot “prompt in, answer out” script.
+        - separator [ref=e85]
+        - 'heading "The First Example: A Tiny Graph" [level=4] [ref=e86]'
+        - paragraph [ref=e87]: The first thing I built was a deliberately tiny example just to understand the mechanics.
+        - code [ref=e89]:
+          - generic [ref=e90]: builder = StateGraph(HelloState)
+          - generic [ref=e91]: builder.add_node("introduce_topic", introduce_topic)
+          - generic [ref=e92]: builder.add_node("explain_graph_shape", explain_graph_shape)
+          - generic [ref=e93]: builder.add_edge(START, "introduce_topic")
+          - generic [ref=e94]: builder.add_edge("introduce_topic", "explain_graph_shape")
+          - generic [ref=e95]: builder.add_edge("explain_graph_shape", END)
+        - paragraph [ref=e96]: "This was useful because it strips the whole idea down to the essentials:"
+        - list [ref=e97]:
+          - listitem [ref=e98]: define a state type
+          - listitem [ref=e99]: define a couple of nodes
+          - listitem [ref=e100]: connect them with edges
+          - listitem [ref=e101]: compile the graph
+        - paragraph [ref=e102]: That is it.
+        - paragraph [ref=e103]: No models. No tools. No prompts. Just workflow mechanics.
+        - paragraph [ref=e104]: For learning, that was the right place to start, because it made it obvious that a node is simply a step of computation and an edge is simply the control-flow rule that determines where execution goes next.
+        - paragraph [ref=e105]: That kind of example is also a good reminder that LangGraph is not only for “full agent” systems. You can use it for ordinary, explicit workflows where an LLM might only appear in one or two nodes.
+        - separator [ref=e106]
+        - heading "The Example That Taught Me the Most" [level=4] [ref=e107]
+        - paragraph [ref=e108]: The more useful example was a small support-ticket router.
+        - paragraph [ref=e109]: "The shared state looked roughly like this:"
+        - code [ref=e111]:
+          - generic [ref=e112]: "class TicketState(TypedDict, total=False):"
+          - generic [ref=e113]: "ticket_text: str"
+          - generic [ref=e114]: "customer_tier: str"
+          - generic [ref=e115]: "category: str"
+          - generic [ref=e116]: "priority: str"
+          - generic [ref=e117]: "response: str"
+          - generic [ref=e118]: "next_step: str"
+          - generic [ref=e119]: "needs_human: bool"
+          - generic [ref=e120]: "history: Annotated[list[str], _append]"
+        - paragraph [ref=e121]: This example made a few important things concrete for me.
+        - paragraph [ref=e122]:
+          - text: First, the state should be
+          - strong [ref=e123]: raw application data
+          - text: ", not prompt-shaped text. That means storing things like"
+          - code [ref=e124]: "`category`"
+          - text: ","
+          - code [ref=e125]: "`priority`"
+          - text: ", and"
+          - code [ref=e126]: "`needs_human`"
+          - text: as explicit fields instead of burying them inside strings.
+        - paragraph [ref=e127]:
+          - text: Second, nodes return
+          - strong [ref=e128]: state updates
+          - text: ", not some giant monolithic output object. One node might classify the ticket. Another might decide whether a human should review it. Another might prepare the next response. Each one owns a small part of the workflow."
+        - paragraph [ref=e129]:
+          - text: Third, the
+          - code [ref=e130]: "`history`"
+          - text: field showed me how state merging works. In this example, multiple nodes append to the same list rather than overwriting it. That gave me a simple audit trail of what happened during the run.
+        - paragraph [ref=e131]: That last part felt especially useful. Once you have branching workflows, being able to inspect the decision path is not a nice-to-have. It is part of making the system debuggable.
+        - paragraph [ref=e132]: "It also felt like a more realistic example than the usual “chatbot” framing. A ticket router has obvious steps, obvious branching, and obvious state: classify the request, decide whether it needs a human, route it, and keep enough history to explain why the system did what it did."
+        - separator [ref=e133]
+        - heading "Conditional Edges Are Where It Starts Feeling Powerful" [level=4] [ref=e134]
+        - paragraph [ref=e135]: The part that felt most “LangGraph” to me was the conditional routing.
+        - code [ref=e137]:
+          - generic [ref=e138]: builder.add_conditional_edges(
+          - generic [ref=e139]: "\"classify_ticket\","
+          - generic [ref=e140]: choose_route,
+          - generic [ref=e141]: "{"
+          - generic [ref=e142]: "\"human_review\": \"human_review\","
+          - generic [ref=e143]: "\"billing_response\": \"billing_response\","
+          - generic [ref=e144]: "\"technical_response\": \"technical_response\","
+          - generic [ref=e145]: "\"general_response\": \"general_response\","
+          - generic [ref=e146]: "},"
+          - generic [ref=e147]: )
+        - paragraph [ref=e148]: This is where the workflow stops being a straight line and starts behaving like an actual process.
+        - paragraph [ref=e149]:
+          - text: The
+          - code [ref=e150]: "`classify_ticket`"
+          - text: node updates the state. Then
+          - code [ref=e151]: "`choose_route`"
+          - text: inspects that state and decides which node should run next.
+        - paragraph [ref=e152]: "That felt familiar immediately, because it is just explicit branching:"
+        - list [ref=e153]:
+          - listitem [ref=e154]: if the ticket is high priority, escalate to a human
+          - listitem [ref=e155]: otherwise route by category
+        - paragraph [ref=e156]: The difference is that the branching is part of the graph structure itself. It is not buried somewhere in a large, tangled block of orchestration code.
+        - paragraph [ref=e157]: That explicitness seems like one of the main reasons to use LangGraph in the first place.
+        - separator [ref=e158]
+        - heading "Graph API vs Functional API" [level=4] [ref=e159]
+        - paragraph [ref=e160]: I also tried the Functional API so I could compare the two approaches.
+        - paragraph [ref=e161]: The Graph API is the one that made the runtime model clearest to me. You see the nodes. You see the edges. You see the graph shape directly.
+        - paragraph [ref=e162]: "The Functional API felt more like:"
+        - paragraph [ref=e163]: “Keep writing normal Python, but let LangGraph wrap it with checkpointing and workflow semantics.”
+        - paragraph [ref=e164]: "That version looked more like this:"
+        - code [ref=e166]:
+          - generic [ref=e167]: "@entrypoint(checkpointer=CHECKPOINTER)"
+          - generic [ref=e168]: "def review_workflow(inputs: dict[str, Any], *, previous: Any = None) -> dict[str, Any]:"
+          - generic [ref=e169]: assessment = score_change(inputs).result()
+          - generic [ref=e170]: decision = choose_reviewer(assessment).result()
+          - generic [ref=e171]: "return {"
+          - generic [ref=e172]: "\"summary\": decision[\"summary\"],"
+          - generic [ref=e173]: "\"risk_score\": decision[\"risk_score\"],"
+          - generic [ref=e174]: "\"recommended_reviewer\": decision[\"reviewer\"],"
+          - generic [ref=e175]: "\"recommended_action\": decision[\"action\"],"
+          - generic [ref=e176]: "\"previous_run\": previous,"
+          - generic [ref=e177]: "}"
+        - paragraph [ref=e178]: This was a helpful contrast.
+        - paragraph [ref=e179]: If the workflow structure itself is important and you want to inspect routing explicitly, the Graph API seems like the better fit.
+        - paragraph [ref=e180]: If the logic is already easier to express as ordinary Python control flow, the Functional API feels more natural.
+        - paragraph [ref=e181]: My first impression is that the Graph API is the better learning tool, while the Functional API is the easier bridge for existing Python orchestration code.
+        - separator [ref=e182]
+        - heading "Where I Think I Would Use LangGraph" [level=4] [ref=e183]
+        - paragraph [ref=e184]: "After playing around with LangGraph for a bit, the use cases that make sense to me are:"
+        - list [ref=e185]:
+          - listitem [ref=e186]: multi-step agents that call tools
+          - listitem [ref=e187]: workflows with branching decisions
+          - listitem [ref=e188]: systems that need thread-level memory
+          - listitem [ref=e189]: flows that may pause for human review
+          - listitem [ref=e190]: long-running processes where resumability matters
+        - paragraph [ref=e191]: "More concrete versions of those might be:"
+        - list [ref=e192]:
+          - listitem [ref=e193]: a support workflow that triages requests before deciding whether to draft a reply or escalate
+          - listitem [ref=e194]: a research assistant that searches, summarizes, then asks for approval before continuing
+          - listitem [ref=e195]: a document-processing pipeline that classifies files, extracts fields, and routes exceptions to a person
+        - paragraph [ref=e196]: The common theme is that there is real workflow complexity to manage.
+        - paragraph [ref=e197]: That also implies where I would not use it.
+        - paragraph [ref=e198]: If I just need to call a model once, maybe parse a response, and return the result, LangGraph feels like unnecessary machinery.
+        - paragraph [ref=e199]: Likewise, if there is no branching, no meaningful state, and no need for persistence, I would probably just use a direct SDK or a simpler LangChain flow.
+        - paragraph [ref=e200]:
+          - text: "That is probably the most important practical takeaway from day one:"
+          - strong [ref=e201]: LangGraph solves orchestration problems, not every LLM problem.
+        - separator [ref=e202]
+        - heading "A Couple of First-Day Gotchas" [level=4] [ref=e203]
+        - paragraph [ref=e204]: One thing that briefly confused me was local development.
+        - paragraph [ref=e205]:
+          - code [ref=e206]: "`langgraph dev`"
+          - text: does run your graph locally, but the Studio UI experience is tied to LangSmith-hosted tooling. So even though the runtime is local, opening the Studio view in a browser may still ask you to log in.
+        - paragraph [ref=e207]: "That makes more sense once you realize these are two separate things:"
+        - list [ref=e208]:
+          - listitem [ref=e209]: the graph server is local
+          - listitem [ref=e210]: the Studio frontend is hosted
+        - paragraph [ref=e211]: You can still work perfectly fine locally using the local API and docs endpoint, but it is worth knowing that “local runtime” does not necessarily mean “fully local browser UI.”
+        - paragraph [ref=e212]: That is a tooling nuance, not a LangGraph concept, but it is exactly the kind of thing that is useful to understand early.
+        - separator [ref=e213]
+        - heading "Final Thoughts" [level=4] [ref=e214]
+        - paragraph [ref=e215]: The thing I learned today is that LangGraph is not really hard in the abstract. It just helps a lot to place it in the right category.
+        - paragraph [ref=e216]: If you approach it expecting some kind of magical agent abstraction, it feels vague.
+        - paragraph [ref=e217]: If you approach it as a workflow runtime with shared state, explicit transitions, and persistence, it becomes much easier to reason about.
+        - paragraph [ref=e218]: That framing also makes it easier to decide when to use it.
+        - paragraph [ref=e219]: "For me, the next useful step is obvious: keep the workflow exactly as it is, but replace one deterministic node with a real model call."
+        - paragraph [ref=e220]: That feels like the right abstraction boundary.
+        - paragraph [ref=e221]: LangGraph should own the workflow. The model should just be one component inside it.
+  - contentinfo [ref=e222]:
+    - generic [ref=e223]:
+      - generic [ref=e224]:
+        - button "Back to top":
+          - img
+          - generic: Back to top
+      - generic [ref=e225]:
+        - generic [ref=e226]: © 2025 | Rudy Adams
+        - generic [ref=e227]:
+          - button "Light theme" [ref=e228] [cursor=pointer]:
+            - img [ref=e229]
+          - button "Dark theme" [ref=e235] [cursor=pointer]:
+            - img [ref=e236]
+          - button "System theme" [ref=e238] [cursor=pointer]:
+            - img [ref=e239]
+  - generic [ref=e243]:
+    - button "Menu" [ref=e244]:
+      - img [ref=e246]
+      - generic: Menu
+    - button "Inspect" [ref=e250]:
+      - img [ref=e252]
+      - generic: Inspect
+    - button "Audit" [ref=e254]:
+      - img [ref=e256]
+      - generic: Audit
+    - button "Settings" [ref=e259]:
+      - img [ref=e261]
+      - generic: Settings

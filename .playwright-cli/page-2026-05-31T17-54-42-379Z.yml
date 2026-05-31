@@ -1,0 +1,68 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "RA Rudy Adams" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e6]:
+          - generic [ref=e7]: RA
+          - generic [ref=e8]: Rudy Adams
+      - navigation [ref=e9]:
+        - link "blog" [ref=e10] [cursor=pointer]:
+          - /url: /blog
+        - generic [ref=e11]: /
+        - link "work" [ref=e12] [cursor=pointer]:
+          - /url: /work
+        - generic [ref=e13]: /
+        - link "projects" [ref=e14] [cursor=pointer]:
+          - /url: /projects
+  - main [ref=e15]:
+    - generic [ref=e17]:
+      - generic [ref=e18]: Work
+      - list [ref=e19]:
+        - listitem [ref=e20]:
+          - generic [ref=e21]: Jun 2016 - Current
+          - generic [ref=e22]: Investec (Specialist Banking)
+          - generic [ref=e23]: Engineering Lead
+          - article [ref=e24]:
+            - paragraph [ref=e25]: Started as senior developer. Was later promoted to Technical lead on a team that’s responsible for a client data platform.
+            - paragraph [ref=e26]: Was further promoted to position of engineering lead and am currently responsible for heading up engineering for a technology division within Investec Specialist Bank.
+        - listitem [ref=e27]:
+          - generic [ref=e28]: May 2013 - May 2016
+          - generic [ref=e29]: FNB (Retail Banking)
+          - generic [ref=e30]: Software Engineer
+          - article [ref=e31]:
+            - paragraph [ref=e32]: Worked as senior Java developer on a team responsible for the bank’s online sales and web platform.
+        - listitem [ref=e33]:
+          - generic [ref=e34]: Dec 2007 - Apr 2013
+          - generic [ref=e35]: Discovery Health (Health Insurance)
+          - generic [ref=e36]: Software Engineer
+          - article [ref=e37]:
+            - paragraph [ref=e38]: Started my career here as a software developer. Worked here for about 5 and a half years in a team that was responsible for communication and content platforms. I primarily worked with Java, XSL and some proprietary technologies.
+  - contentinfo [ref=e39]:
+    - generic [ref=e40]:
+      - generic [ref=e41]:
+        - button "Back to top":
+          - img
+          - generic: Back to top
+      - generic [ref=e42]:
+        - generic [ref=e43]: © 2025 | Rudy Adams
+        - generic [ref=e44]:
+          - button "Light theme" [ref=e45] [cursor=pointer]:
+            - img [ref=e46]
+          - button "Dark theme" [ref=e52] [cursor=pointer]:
+            - img [ref=e53]
+          - button "System theme" [ref=e55] [cursor=pointer]:
+            - img [ref=e56]
+  - generic [ref=e60]:
+    - button "Menu" [ref=e61]:
+      - img [ref=e63]
+      - generic: Menu
+    - button "Inspect" [ref=e67]:
+      - img [ref=e69]
+      - generic: Inspect
+    - button "Audit" [ref=e71]:
+      - img [ref=e73]
+      - generic: Audit
+    - button "Settings" [ref=e76]:
+      - img [ref=e78]
+      - generic: Settings

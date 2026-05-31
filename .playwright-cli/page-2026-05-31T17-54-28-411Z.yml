@@ -1,0 +1,87 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "RA Rudy Adams" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e6]:
+          - generic [ref=e7]: RA
+          - generic [ref=e8]: Rudy Adams
+      - navigation [ref=e9]:
+        - link "blog" [ref=e10] [cursor=pointer]:
+          - /url: /blog
+        - generic [ref=e11]: /
+        - link "work" [ref=e12] [cursor=pointer]:
+          - /url: /work
+        - generic [ref=e13]: /
+        - link "projects" [ref=e14] [cursor=pointer]:
+          - /url: /projects
+  - main [ref=e15]:
+    - generic [ref=e17]:
+      - generic [ref=e18]: Blog
+      - generic [ref=e19]:
+        - generic [ref=e20]:
+          - generic [ref=e21]: "2026"
+          - list [ref=e23]:
+            - listitem [ref=e24]:
+              - link "May 10, 2026 Playing with LangGraph What clicked for me about LangGraph after building a small local learning project." [ref=e25] [cursor=pointer]:
+                - /url: /blog/09-understanding-langgraph
+                - generic [ref=e26]:
+                  - time [ref=e28]: May 10, 2026
+                  - generic [ref=e29]: Playing with LangGraph
+                  - generic [ref=e30]: What clicked for me about LangGraph after building a small local learning project.
+                - img [ref=e31]
+            - listitem [ref=e33]:
+              - link "Mar 14, 2026 Containing AI Agents with Virtual Machines and NAT Networking Running AI Agents Safely with a Local VM (and QEMU Port Forwarding)" [ref=e34] [cursor=pointer]:
+                - /url: /blog/03-opencla-vm-net
+                - generic [ref=e35]:
+                  - time [ref=e37]: Mar 14, 2026
+                  - generic [ref=e38]: Containing AI Agents with Virtual Machines and NAT Networking
+                  - generic [ref=e39]: Running AI Agents Safely with a Local VM (and QEMU Port Forwarding)
+                - img [ref=e40]
+        - generic [ref=e42]:
+          - generic [ref=e43]: "2025"
+          - list [ref=e45]:
+            - listitem [ref=e46]:
+              - link "Jul 20, 2025 Azure OIDC and Github Actions Using OIDC to authenticate from Github Actions to Azure" [ref=e47] [cursor=pointer]:
+                - /url: /blog/02-oidc-azure
+                - generic [ref=e48]:
+                  - time [ref=e50]: Jul 20, 2025
+                  - generic [ref=e51]: Azure OIDC and Github Actions
+                  - generic [ref=e52]: Using OIDC to authenticate from Github Actions to Azure
+                - img [ref=e53]
+            - listitem [ref=e55]:
+              - link "Jul 15, 2025 Hello world My first blog post." [ref=e56] [cursor=pointer]:
+                - /url: /blog/01-my-first-post
+                - generic [ref=e57]:
+                  - time [ref=e59]: Jul 15, 2025
+                  - generic [ref=e60]: Hello world
+                  - generic [ref=e61]: My first blog post.
+                - img [ref=e62]
+  - contentinfo [ref=e64]:
+    - generic [ref=e65]:
+      - generic [ref=e66]:
+        - button "Back to top":
+          - img
+          - generic: Back to top
+      - generic [ref=e67]:
+        - generic [ref=e68]: © 2025 | Rudy Adams
+        - generic [ref=e69]:
+          - button "Light theme" [ref=e70] [cursor=pointer]:
+            - img [ref=e71]
+          - button "Dark theme" [ref=e77] [cursor=pointer]:
+            - img [ref=e78]
+          - button "System theme" [ref=e80] [cursor=pointer]:
+            - img [ref=e81]
+  - generic [ref=e85]:
+    - button "Menu" [ref=e86]:
+      - img [ref=e88]
+      - generic: Menu
+    - button "Inspect" [ref=e92]:
+      - img [ref=e94]
+      - generic: Inspect
+    - button "Audit" [ref=e96]:
+      - img [ref=e98]
+      - generic: Audit
+    - button "Settings" [ref=e101]:
+      - img [ref=e103]
+      - generic: Settings

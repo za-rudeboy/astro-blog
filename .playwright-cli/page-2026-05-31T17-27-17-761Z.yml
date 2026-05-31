@@ -1,0 +1,81 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "Rudy Adams" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e6]: Rudy Adams
+      - navigation [ref=e7]:
+        - link "blog" [ref=e8] [cursor=pointer]:
+          - /url: /blog
+        - generic [ref=e9]: /
+        - link "work" [ref=e10] [cursor=pointer]:
+          - /url: /work
+        - generic [ref=e11]: /
+        - link "projects" [ref=e12] [cursor=pointer]:
+          - /url: /projects
+  - main [ref=e13]:
+    - generic [ref=e15]:
+      - generic [ref=e16]: Blog
+      - generic [ref=e17]:
+        - generic [ref=e18]:
+          - generic [ref=e19]: "2026"
+          - list [ref=e21]:
+            - listitem [ref=e22]:
+              - link "Playing with LangGraph What clicked for me about LangGraph after building a small local learning project." [ref=e23] [cursor=pointer]:
+                - /url: /blog/09-understanding-langgraph
+                - generic [ref=e24]:
+                  - generic [ref=e25]: Playing with LangGraph
+                  - generic [ref=e26]: What clicked for me about LangGraph after building a small local learning project.
+                - img [ref=e27]
+            - listitem [ref=e29]:
+              - link "Containing AI Agents with Virtual Machines and NAT Networking Running AI Agents Safely with a Local VM (and QEMU Port Forwarding)" [ref=e30] [cursor=pointer]:
+                - /url: /blog/03-opencla-vm-net
+                - generic [ref=e31]:
+                  - generic [ref=e32]: Containing AI Agents with Virtual Machines and NAT Networking
+                  - generic [ref=e33]: Running AI Agents Safely with a Local VM (and QEMU Port Forwarding)
+                - img [ref=e34]
+        - generic [ref=e36]:
+          - generic [ref=e37]: "2025"
+          - list [ref=e39]:
+            - listitem [ref=e40]:
+              - link "Azure OIDC and Github Actions Using OIDC to authenticate from Github Actions to Azure" [ref=e41] [cursor=pointer]:
+                - /url: /blog/02-oidc-azure
+                - generic [ref=e42]:
+                  - generic [ref=e43]: Azure OIDC and Github Actions
+                  - generic [ref=e44]: Using OIDC to authenticate from Github Actions to Azure
+                - img [ref=e45]
+            - listitem [ref=e47]:
+              - link "Hello world My first blog post." [ref=e48] [cursor=pointer]:
+                - /url: /blog/01-my-first-post
+                - generic [ref=e49]:
+                  - generic [ref=e50]: Hello world
+                  - generic [ref=e51]: My first blog post.
+                - img [ref=e52]
+  - contentinfo [ref=e54]:
+    - generic [ref=e55]:
+      - generic [ref=e56]:
+        - button "Back to top":
+          - img
+          - generic: Back to top
+      - generic [ref=e57]:
+        - generic [ref=e58]: © 2025 | Rudy Adams
+        - generic [ref=e59]:
+          - button "Light theme" [ref=e60] [cursor=pointer]:
+            - img [ref=e61]
+          - button "Dark theme" [ref=e67] [cursor=pointer]:
+            - img [ref=e68]
+          - button "System theme" [ref=e70] [cursor=pointer]:
+            - img [ref=e71]
+  - generic [ref=e75]:
+    - button "Menu" [ref=e76]:
+      - img [ref=e78]
+      - generic: Menu
+    - button "Inspect" [ref=e82]:
+      - img [ref=e84]
+      - generic: Inspect
+    - button "Audit" [ref=e86]:
+      - img [ref=e88]
+      - generic: Audit
+    - button "Settings" [ref=e91]:
+      - img [ref=e93]
+      - generic: Settings
